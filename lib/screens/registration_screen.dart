@@ -6,14 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class BloodRequest extends StatefulWidget {
-  const BloodRequest({Key? key}) : super(key: key);
+class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  _BloodRequestState createState() => _BloodRequestState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _BloodRequestState extends State<BloodRequest> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
 
   // string for displaying the error Message
@@ -173,12 +173,7 @@ class _BloodRequestState extends State<BloodRequest> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            if(_auth.currentUser?.email == emailEditingController.text){
-              signUp(emailEditingController.text, passwordEditingController.text);
-            } else{
-              Fluttertoast.showToast(msg: "Account created successfully :) ");
-            }
-
+            signUp(emailEditingController.text, passwordEditingController.text);
           },
           child: Text(
             "SignUp",
@@ -304,6 +299,6 @@ class _BloodRequestState extends State<BloodRequest> {
     Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => LoginScreen()),
-            (route) => false);
+        (route) => false);
   }
 }

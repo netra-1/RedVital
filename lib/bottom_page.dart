@@ -1,4 +1,7 @@
-import 'package:email_password_login/screens/profile/components/settings.dart';
+
+import 'package:email_password_login/screens/home_screen.dart';
+import 'package:email_password_login/screens/profile/components/image_upload.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_password_login/blood_donation.dart';
 import 'package:email_password_login/home_page.dart';
@@ -6,6 +9,7 @@ import 'package:email_password_login/screens/profile/profile_screen.dart';
 
 import 'blood_banks.dart';
 import 'hospitals.dart';
+import 'model/user_model.dart';
 
 class BottomPage extends StatefulWidget {
   @override
@@ -23,7 +27,7 @@ class _BottomPageState extends State<BottomPage> {
 
     BloodBanks(),
 
-    Dmc(),
+    BloodRequest(),
 
     Hospital(),
 

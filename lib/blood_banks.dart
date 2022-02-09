@@ -2,99 +2,195 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 
-import 'Assistants/assistantMethods.dart';
+const LatLng SOURCE_LOCATION = LatLng(27.7215,85.3201);
+const LatLng DEST_LOCATION = LatLng(27.7062581,85.3278125);
+const double CAMERA_ZOOM = 16;
+const double CAMERA_TILT = 80;
+const double CAMERA_BEARING = 30;
+const double PIN_VISIBLE_POSITION = 20;
+const double PIN_INVISIBLE_POSITION = -220;
 
 class BloodBanks extends StatefulWidget {
   const BloodBanks({Key? key}) : super(key: key);
 
   @override
-  _BloodBankState createState() => _BloodBankState();
+  _BloodBanksState createState() => _BloodBanksState();
 }
 
-class _BloodBankState extends State<BloodBanks>{
+class _BloodBanksState extends State<BloodBanks> {
+  Completer<GoogleMapController> _controller = Completer();
+  BitmapDescriptor? sourceIcon;
+  BitmapDescriptor? destinationIcon;
+  Set<Marker> _markers = Set<Marker>();
 
-  Completer<GoogleMapController> _controllerGoogleMap = Completer();
-  late GoogleMapController newGoogleMapController;
+  LatLng? currentLocation;
+  LatLng? destinationLocation;
 
-  late Position currentPosition;
-  var geoLocator = Geolocator();
-
-
-
- void locatePosition() async{
-   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-   currentPosition = position;
-
-   // LocationPermission permission;
-   // permission = await Geolocator.requestPermission();
-
-   LatLng latLatPosition = LatLng(position.latitude, position.longitude);
-
-   CameraPosition cameraPosition = new CameraPosition(target: latLatPosition, zoom: 14);
-   newGoogleMapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-
-   String address = await AssistantMethods.searchCoordinateAddress(position, context);
-   print("This is your address:: "+ address);
- }
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(27.723120, 85.322573),
-    zoom: 14.4746,
-  );
 
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Blood Banks"),
-      ),
+  void initState() {
+    super.initState();
 
+    // polylinePoints = PolylinePoints();
+
+    // set up initial locations
+    this.setInitialLocation();
+
+
+    this.setSourceAndDestinationMarkerIcons();
+
+  }
+
+
+
+  void setSourceAndDestinationMarkerIcons() async {
+    // String parentCat = widget.subCategory!.imgName!.split("_")[0];
+
+    sourceIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.0),
+        'images/source.png'
+    );
+
+    destinationIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.0),
+        'images/destination.png'
+    );
+  }
+
+  void setInitialLocation() {
+    currentLocation = LatLng(
+        SOURCE_LOCATION.latitude,
+        SOURCE_LOCATION.longitude
+    );
+
+    destinationLocation = LatLng(
+        DEST_LOCATION.latitude,
+        DEST_LOCATION.longitude
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    CameraPosition initialCameraPosition = CameraPosition(
+        zoom: CAMERA_ZOOM,
+        tilt: CAMERA_TILT,
+        bearing: CAMERA_BEARING,
+        target: SOURCE_LOCATION
+    );
+
+    return Scaffold(
       body: Stack(
         children: [
-          GoogleMap(
-            mapType: MapType.normal,
-            myLocationButtonEnabled: true,
-            initialCameraPosition: _kGooglePlex,
-            myLocationEnabled: true,
-            zoomGesturesEnabled: true,
-            zoomControlsEnabled: true,
-            onMapCreated: (GoogleMapController controller){
-              _controllerGoogleMap.complete(controller);
-              newGoogleMapController = controller;
+          Positioned.fill(
+              child: GoogleMap(
+                myLocationEnabled: true,
+                compassEnabled: false,
+                tiltGesturesEnabled: false,
+                // polylines: _polylines,
+                markers: _markers,
+                mapType: MapType.normal,
+                initialCameraPosition: initialCameraPosition,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
 
-              locatePosition();
-            },
+                  showPinsOnMap();
+                },
+              )
+          ),
 
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 35,
-              vertical: 30,
-            ),
-            child: TextField(
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Color(0xff52555a),
-                  ),
-                  hintText: "Search blood banks...",
-                  hintStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  fillColor: Colors.grey[300],
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10.0),
-                  )),
-            ),
-          ),
+          Positioned(
+              top: 100,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.all(12),
+                margin: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: Offset.zero
+                      )
+                    ]
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          image: DecorationImage(
+                              image: AssetImage('images/profile.png'),
+                              fit: BoxFit.cover
+                          )
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text("John Doe",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey
+                            ),
+                          ),
+                          Text("Current Location",
+                            style: TextStyle(
+                                color: Colors.red
+                            ),
+                          )
+
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.location_pin,
+                      color: Colors.red,
+                      size: 40,
+                    )
+                  ],
+                ),
+
+              )
+          )
+
         ],
       ),
     );
   }
+
+  void showPinsOnMap() {
+    setState(() {
+      _markers.add(Marker(
+        markerId: MarkerId('sourcePin'),
+        position: currentLocation!,
+        icon: sourceIcon!,
+        // onTap: () {
+        //   setState(() {
+        //     this.userBadgeSelected = true;
+        //   });
+        // }
+      ));
+
+      _markers.add(Marker(
+        markerId: MarkerId('destinationPin'),
+        position: destinationLocation!,
+        icon: destinationIcon!,
+        // onTap: () {
+        //   setState(() {
+        //     this.pinPillPosition = PIN_VISIBLE_POSITION;
+        //   });
+        // }
+      ));
+    });
+  }
+
 }

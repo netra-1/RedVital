@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "828684578291",
+    "project_id": "redvital-dfbb9",
+    "storage_bucket": "redvital-dfbb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828684578291:android:031db20e8b4c29c916b686",
+        "android_client_info": {
+          "package_name": "com.scavengers.redvital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828684578291-k78ph0nri6e8nn4d2pip7gcp51ahtpv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlZYxs0ibKBjdutHCgIo9t0YBhPH9-CXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828684578291-k78ph0nri6e8nn4d2pip7gcp51ahtpv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

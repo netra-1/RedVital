@@ -125,7 +125,7 @@ class _BloodBanksState extends State<FindDonor> {
                   child: RaisedButton(
                     child: Text("Find Blood Donor"),
                     onPressed: () {
-                      Dmc();
+                      BloodRequest();
                     },
                   ),
                 ),

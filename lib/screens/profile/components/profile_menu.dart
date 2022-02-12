@@ -32,7 +32,7 @@ class ProfileMenu extends StatelessWidget {
             ),
             SizedBox(width: 20),
             Expanded(child: Text(text,
-            style: TextStyle(
+              style: TextStyle(
                 fontFamily: "Bitter",
                 fontWeight: FontWeight.w600,
                 color: Color.fromRGBO(25, 25, 25, 0.8),

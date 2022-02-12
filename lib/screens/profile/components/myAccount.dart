@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_password_login/model/user_model.dart';
-import 'package:email_password_login/screens/login_screen.dart';
-import 'package:email_password_login/screens/profile/components/edit_profilePic.dart';
-import 'package:email_password_login/screens/profile/components/myProfileDivider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:red_vital/model/user_model.dart';
+import 'package:red_vital/screens/profile/components/editProfile.dart';
+import 'package:red_vital/screens/profile/profile_screen.dart';
+
+import '../../loginRegister/login_screen.dart';
+import 'divider.dart';
+import 'edit_profilePic.dart';
 
 class MyAccount extends StatefulWidget {
   @override
@@ -41,13 +44,19 @@ class _MyAccountState extends State<MyAccount> {
             minimumSize: Size(150.0, 40.0),
             side: BorderSide(width: 1, color: Colors.red),
           ),
-          onPressed: () {},
-        child: Text(
-          "Edit Profile",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 15, color: Colors.red, fontWeight: FontWeight.w600, fontFamily: "Bitter"),
-        )),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EditProfile()));
+            },
+          child: Text(
+            "Edit Profile",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 15, color: Colors.red, fontWeight: FontWeight.w600, fontFamily: "Bitter"),
+          )),
     );
     return Scaffold(
       backgroundColor: Colors.white,
@@ -58,6 +67,12 @@ class _MyAccountState extends State<MyAccount> {
           icon: Icon(Icons.arrow_back, color: Colors.red),
           onPressed: () {
             // passing this to our root
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) =>
+            //             ProfileScreen()));
+
             Navigator.of(context).pop();
           },
         ),
@@ -73,126 +88,126 @@ class _MyAccountState extends State<MyAccount> {
               editProfileButton,
               SizedBox(height: 7),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                padding: EdgeInsets.fromLTRB(30, 0, 30, 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20),
-                      Text(
-                        "Full Name",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    Text(
+                      "Full Name",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "${loggedInUser.firstName} ${loggedInUser.secondName}",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.firstName} ${loggedInUser.secondName}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                      SizedBox(height: 24),
-                      Text(
-                        "Email address",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Divider(),
+                    SizedBox(height: 24),
+                    Text(
+                      "Email address",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "${loggedInUser.email}",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.email}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                      SizedBox(height: 24),
-                      Text(
-                        "Gender",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Divider(),
+                    SizedBox(height: 24),
+                    Text(
+                      "Gender",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Female",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.gender}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                      SizedBox(height: 24),
-                      Text(
-                        "Age",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Divider(),
+                    SizedBox(height: 24),
+                    Text(
+                      "Age",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "20",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.age}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                      SizedBox(height: 24),
-                      Text(
-                        "Blood Type",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Divider(),
+                    SizedBox(height: 24),
+                    Text(
+                      "Blood Type",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "B+",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.bloodType}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                      SizedBox(height: 24),
-                      Text(
-                        "Contact Number",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    Divider(),
+                    SizedBox(height: 24),
+                    Text(
+                      "Contact Number",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        "9845612478",
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Color.fromRGBO(25, 25, 25, 0.8),
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 0),
+                    Text(
+                      "${loggedInUser.phoneNo}",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Color.fromRGBO(25, 25, 25, 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
-                      Divider(),
-                    ],
+                    ),
+                    Divider(),
+                  ],
                 ),
               ),
             ],

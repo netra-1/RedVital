@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_password_login/model/user_model.dart';
-import 'package:email_password_login/screens/login_screen.dart';
-import 'package:email_password_login/screens/profile/components/change_password.dart';
-import 'package:email_password_login/screens/profile/components/myAccount.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:red_vital/model/user_model.dart';
+import 'package:red_vital/screens/homePage/about_page.dart';
 
+import '../../loginRegister/login_screen.dart';
+import '../../loginRegister/change_password.dart';
 import 'divider.dart';
+import 'myAccount.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
@@ -94,7 +95,10 @@ class _BodyState extends State<Body> {
             ProfileMenu(
               text: "About Us",
               icon: "assets/about.svg",
-              press: () {},
+              press: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutPage()));},
             ),
             Divider(),
             ProfileMenu(

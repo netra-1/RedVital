@@ -91,17 +91,14 @@ class _ChangePasswordState extends State<ChangePassword> {
         //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
       });
     }
-    //signup button
+    //changePassword button
     final changePasswordButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.redAccent,
-      child: MaterialButton(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          minWidth: MediaQuery
-              .of(context)
-              .size
-              .width,
+      child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            shape: StadiumBorder(),
+            minimumSize: Size(380.0, 48.0),
+            side: BorderSide(width: 1, color: Colors.red),
+          ),
           onPressed: () {
             changePassword(passwordEditingController.text);
           },
@@ -109,10 +106,9 @@ class _ChangePasswordState extends State<ChangePassword> {
             "Change Password",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 18, color: Colors.red, fontWeight: FontWeight.w600),
           )),
     );
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -127,33 +123,34 @@ class _ChangePasswordState extends State<ChangePassword> {
           },
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                        height: 180,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        )),
-                    SizedBox(height: 45),
-                    passwordField,
-                    SizedBox(height: 20),
-                    confirmPasswordField,
-                    SizedBox(height: 20),
-                    changePasswordButton,
-                    SizedBox(height: 15),
-                  ],
-                ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(36, 0, 36, 36),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Change Password",
+                    style: TextStyle(
+                      fontFamily: "Great Vibes",
+                      fontSize: 50,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromRGBO(250, 51, 67, 1),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  passwordField,
+                  SizedBox(height: 20),
+                  confirmPasswordField,
+                  SizedBox(height: 20),
+                  changePasswordButton,
+                  SizedBox(height: 15),
+                ],
               ),
             ),
           ),

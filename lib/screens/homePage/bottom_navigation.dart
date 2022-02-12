@@ -1,15 +1,10 @@
-
-import 'package:email_password_login/screens/home_screen.dart';
-import 'package:email_password_login/screens/profile/components/image_upload.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:email_password_login/blood_request.dart';
-import 'package:email_password_login/home_page.dart';
-import 'package:email_password_login/screens/profile/profile_screen.dart';
+import 'package:red_vital/screens/profile/profile_screen.dart';
 
-import 'blood_banks.dart';
-import 'hospitals.dart';
-import 'model/user_model.dart';
+import '../maps/blood_banks.dart';
+import '../bloodRequest/blood_request.dart';
+import 'home_page.dart';
+import '../maps/hospitals.dart';
 
 class BottomPage extends StatefulWidget {
   @override
@@ -54,48 +49,49 @@ class _BottomPageState extends State<BottomPage> {
           elevation: 0.0,
           backgroundColor: Color(0xff0c0f14),
           type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                size: 30,
+                size: 28,
               ),
               label: "Home",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_balance_rounded,
-                size: 30,
+                size: 28,
               ),
-              label: "Blood Bank",
+              label: "BloodBank",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.bloodtype,
-                size: 30,
+                size: 28,
               ),
-              label: "Find Blood",
+              label: "FindDonor",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.local_hospital,
-                size: 30,
+                size: 28,
               ),
-              label: "notifications",
+              label: "Hospitals",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                size: 30,
+                size: 28,
               ),
-              label: "Settings",
+              label: "Profile",
             ),
           ],
           currentIndex: _selectedIndex,
           unselectedItemColor: Color(0xff4e5053),
-          selectedItemColor: Color(0xffd17842),
+          selectedItemColor: Colors.redAccent,
+          // selectedItemColor: Color(0xffd17842),
           onTap: _onItemTapped,
         ),
       ),

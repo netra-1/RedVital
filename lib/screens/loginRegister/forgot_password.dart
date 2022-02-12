@@ -1,10 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_password_login/model/user_model.dart';
-import 'package:email_password_login/screens/home_screen.dart';
-import 'package:email_password_login/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -36,10 +31,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         validator: (value) {
           RegExp regex = new RegExp(r'^.{3,}$');
           if (value!.isEmpty) {
-            return ("First Name cannot be Empty");
+            return ("Email cannot be Empty");
           }
           if (!regex.hasMatch(value)) {
-            return ("Enter Valid name(Min. 3 Character)");
+            return ("Enter Valid email");
           }
           return null;
         },
@@ -50,7 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.account_circle),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "First Name",
+          hintText: "Enter email address",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -71,17 +66,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             if( _auth.currentUser?.email == emailEditingController.text ){
               _auth.sendPasswordResetEmail(email: emailEditingController.text).whenComplete(() =>
                   showSnackBar("check you mail for password",
-                  Duration(milliseconds: 400)))
-                  .then((value) => Navigator.of(context).pop()); 
+                      Duration(milliseconds: 400)))
+                  .then((value) => Navigator.of(context).pop());
 
             } else{
-            // on Exception catch (_) {
+              // on Exception catch (_) {
               showSnackBar("The above email does not match with any user",
                   Duration(milliseconds: 400));
             }
           },
           child: Text(
-            "Reset email",
+            "Request Reset",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -102,31 +97,40 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           },
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                        height: 180,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        )),
-                    SizedBox(height: 45),
-                    firstNameField,
-                    SizedBox(height: 20),
-                    forgotPasswordButton,
-                    SizedBox(height: 15),
-                  ],
-                ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(36, 20, 36, 36),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Reset Password",
+                          style: TextStyle(
+                            fontFamily: "Great Vibes",
+                            fontSize: 54,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(250, 51, 67, 1),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 45),
+                  firstNameField,
+                  SizedBox(height: 20),
+                  forgotPasswordButton,
+                  SizedBox(height: 15),
+                ],
               ),
             ),
           ),

@@ -1,11 +1,10 @@
-import 'package:email_password_login/bottom_page.dart';
-import 'package:email_password_login/home_page.dart';
-import 'package:email_password_login/screens/forgot_password.dart';
-import 'package:email_password_login/screens/home_screen.dart';
-import 'package:email_password_login/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:red_vital/screens/loginRegister/registration_screen.dart';
+
+import '../homePage/bottom_navigation.dart';
+import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // firebase
   final _auth = FirebaseAuth.instance;
-  
+
   // string for displaying the error Message
   String? errorMessage;
 
@@ -111,16 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
             Navigator.push(
-            context,
-            MaterialPageRoute(
-            builder: (context) => ForgotPassword())
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ForgotPassword())
             );}
           ,
           child: Text(
             "Forgot Password?",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 13, color: Colors.redAccent, fontWeight: FontWeight.bold),
+                fontSize: 14, color: Colors.red, fontWeight: FontWeight.bold),
           )),
     );
 
@@ -139,12 +138,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                        height: 200,
+                        height: 180,
                         child: Image.asset(
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         )),
-                    SizedBox(height: 45),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(37,0,0,0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "RedVital",
+                            style: TextStyle(
+                              fontFamily: "Majesty",
+                              fontSize: 54,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromRGBO(250, 51, 67, 1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 25),
+                    SizedBox(height: 10),
                     emailField,
                     SizedBox(height: 25),
                     passwordField,
@@ -166,14 +183,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                  color: Colors.redAccent,
+                                  color: Colors.red,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
                           )
                         ]),
-                    SizedBox(height: 15),
-                    forgotPasswordButton,
+                    SizedBox(height: 18),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ForgotPassword())
+                              );},
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                          )
+                        ]),
                   ],
                 ),
               ),
@@ -191,10 +226,10 @@ class _LoginScreenState extends State<LoginScreen> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => BottomPage())),
-                });
+          Fluttertoast.showToast(msg: "Login Successful"),
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => BottomPage())),
+        });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
           case "invalid-email":

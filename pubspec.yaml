@@ -27,6 +27,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cupertino_icons: ^1.0.2
+  firebase_core: ^1.6.0
+  firebase_auth: ^3.1.0
+  cloud_firestore: ^2.5.1
+  firebase_storage: ^10.2.6
   flutter:
     sdk: flutter
 
@@ -37,10 +42,14 @@ dependencies:
 #  firebase_core: ^1.12.0
 #  firebase_auth: ^3.3.6
 #  firebase_database: ^9.0.6
-  cupertino_icons: ^1.0.2
-  firebase_core: ^0.5.0+1
-  firebase_auth: ^0.18.1+2
-  firebase_database: ^4.1.1
+
+
+  flutter_svg: ^1.0.3
+  fluttertoast: ^8.0.8
+  google_fonts: ^2.3.0
+  google_maps_controller: ^1.2.0
+  google_maps_flutter: ^2.1.1
+  image_picker: ^0.8.4+6
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +86,26 @@ flutter:
      - images/redmarker.png
      - images/taxi.png
      - images/user_icon.png
+     - assets/logo.png
+     - assets/about.svg
+     - assets/Bell.svg
+     - assets/Camera_Icon.svg
+     - assets/coffee.jpg
+     - assets/coffee1.jpeg
+     - assets/coffee2.jpeg
+     - assets/coffee3.jpeg
+     - assets/coffee4.jpeg
+     - assets/coffee5.jpeg
+     - assets/coffee6.jpeg
+     - assets/coffee7.jpeg
+     - assets/coffee8.jpeg
+     - assets/coffeeicon.svg
+     - assets/Log_out.svg
+     - assets/milkicon.svg
+     - assets/profile.png
+     - assets/Question_mark.svg
+     - assets/Settings.svg
+     - assets/User.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -90,15 +119,24 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Signatra
+    - family: Exo
       fonts:
-        - asset: fonts/Signatra.ttf
-    - family: Brand-Regular
+        - asset: fonts/Exo-Regular.ttf
+    - family: Bitter
       fonts:
-          - asset: fonts/bolt-regular.ttf
-    - family: Brand Bold
+        - asset: fonts/Bitter-Regular.ttf
+    - family: Roboto
       fonts:
-          - asset: fonts/bolt-semibold.ttf
+        - asset: fonts/Roboto-Light.ttf
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+    - family: Great Vibes
+      fonts:
+        - asset: fonts/GreatVibes-Regular.ttf
+    - family: Majesty
+      fonts:
+        - asset: fonts/Majesty-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

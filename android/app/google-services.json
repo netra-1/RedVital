@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "375228357034",
-    "project_id": "final-redvital-1a65e",
-    "storage_bucket": "final-redvital-1a65e.appspot.com"
+    "project_number": "635974313829",
+    "project_id": "project-redvital",
+    "storage_bucket": "project-redvital.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:375228357034:android:becc24f17f0f1c4fc0b3d3",
+        "mobilesdk_app_id": "1:635974313829:android:3955adc544ee771181a38c",
         "android_client_info": {
-          "package_name": "com.redvital.scavengers"
+          "package_name": "com.scavengers.redvital"
         }
       },
       "oauth_client": [
         {
-          "client_id": "375228357034-l3c98mq77019t44rj3jik4p5cn51osih.apps.googleusercontent.com",
+          "client_id": "635974313829-0p04vqlaiue5qb1igdu46slns866cut3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmAXZo-STRrM8hE4WJo_UoVqOcgC22BY0"
+          "current_key": "AIzaSyDnQCFktgLeqkIrrP0rtjAcJssbLYWj658"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "375228357034-l3c98mq77019t44rj3jik4p5cn51osih.apps.googleusercontent.com",
+              "client_id": "635974313829-0p04vqlaiue5qb1igdu46slns866cut3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

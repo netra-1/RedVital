@@ -96,7 +96,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           if (value!.isEmpty) {
             return ("Phone no cannot be empty");
           }
-          if (!RegExp("*?[0-9] *?){10}")
+          if (!RegExp("( *?[0-9] *?){10}")
               .hasMatch(value)) {
             return ("Please Enter a valid number");
           }

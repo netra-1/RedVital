@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:red_vital/model/user_model.dart';
+import 'package:red_vital/screens/homePage/bottom_navigation.dart';
 import 'package:red_vital/screens/profile/components/editProfile.dart';
 import 'package:red_vital/screens/profile/profile_screen.dart';
 
@@ -66,14 +67,11 @@ class _MyAccountState extends State<MyAccount> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.red),
           onPressed: () {
-            // passing this to our root
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             ProfileScreen()));
-
-            Navigator.of(context).pop();
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        BottomPage(index: 3,)));
           },
         ),
       ),

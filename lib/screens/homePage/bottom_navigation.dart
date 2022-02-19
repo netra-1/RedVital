@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:red_vital/screens/bloodRequest/blood_request.dart';
+import 'package:red_vital/screens/maps/hospitals.dart';
 import 'package:red_vital/screens/profile/profile_screen.dart';
 
-import '../maps/blood_banks.dart';
-import '../bloodRequest/blood_request.dart';
 import 'home_page.dart';
-import '../maps/hospitals.dart';
 
 class BottomPage extends StatefulWidget {
+  var index;
+
+  BottomPage({Key? key, required this.index}) : super(key: key);
   @override
   _BottomPageState createState() => _BottomPageState();
 }
 
 class _BottomPageState extends State<BottomPage> {
-  int _selectedIndex = 0;
+  // int selectedIndex = widget.index;
 
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 35, fontWeight: FontWeight.bold);
 
   static List<Widget> _widgetOption = <Widget>[
     HomePage(),
 
-    BloodBanks(),
-
     BloodRequest(),
 
-    Hospital(),
+    Hospitals(),
 
     ProfileScreen(),
 
@@ -32,7 +32,7 @@ class _BottomPageState extends State<BottomPage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      widget.index = index;
     });
   }
 
@@ -41,7 +41,7 @@ class _BottomPageState extends State<BottomPage> {
     return Scaffold(
       backgroundColor: Color(0xff0c0f14),
       body: Center(
-        child: _widgetOption.elementAt(_selectedIndex),
+        child: _widgetOption.elementAt(widget.index),
       ),
       bottomNavigationBar: SizedBox(
         height: 70,
@@ -55,43 +55,35 @@ class _BottomPageState extends State<BottomPage> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                size: 28,
+                size: 32,
               ),
               label: "Home",
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_balance_rounded,
-                size: 28,
-              ),
-              label: "BloodBank",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.bloodtype,
-                size: 28,
+                size: 32,
               ),
-              label: "FindDonor",
+              label: "Find Donor",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.local_hospital,
-                size: 28,
+                size: 32,
               ),
               label: "Hospitals",
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                size: 28,
+                size: 32,
               ),
               label: "Profile",
             ),
           ],
-          currentIndex: _selectedIndex,
+          currentIndex: widget.index,
           unselectedItemColor: Color(0xff4e5053),
-          selectedItemColor: Colors.redAccent,
-          // selectedItemColor: Color(0xffd17842),
+          selectedItemColor: Color(0xffd17842),
           onTap: _onItemTapped,
         ),
       ),

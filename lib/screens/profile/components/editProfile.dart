@@ -14,9 +14,23 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final _auth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
 
   // string for displaying the error Message
   String? errorMessage;
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
 
   // our form key
@@ -31,6 +45,13 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    // first name field
+    firstNameEditingController.text = "${loggedInUser.firstName}";
+    secondNameEditingController.text = "${loggedInUser.secondName}";
+    phoneNoEditingController.text = "${loggedInUser.phoneNo}";
+    ageEditingController.text = "${loggedInUser.age}";
+    genderEditingController.text = "${loggedInUser.gender}";
+    bloodTypeEditingController.text = "${loggedInUser.bloodType}";
     //first name field
     final firstNameField = TextFormField(
         autofocus: false,

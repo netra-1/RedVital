@@ -6,6 +6,7 @@ import 'package:red_vital/screens/loginRegister/registration_screen.dart';
 import '../homePage/bottom_navigation.dart';
 import 'forgot_password.dart';
 
+// class of login screen
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 

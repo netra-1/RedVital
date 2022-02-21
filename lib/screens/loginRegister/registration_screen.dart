@@ -6,6 +6,7 @@ import 'package:red_vital/model/user_model.dart';
 
 import 'login_screen.dart';
 
+// lass of reg screen
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 

@@ -138,30 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                        height: 180,
+                        height: 280,
                         child: Image.asset(
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         )),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(37,0,0,0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            "RedVital",
-                            style: TextStyle(
-                              fontFamily: "Majesty",
-                              fontSize: 54,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromRGBO(250, 51, 67, 1),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 25),
-                    SizedBox(height: 10),
                     emailField,
                     SizedBox(height: 25),
                     passwordField,

@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_controller/google_maps_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:red_vital/model/place.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:google_maps_controller/google_maps_controller.dart';
+import 'package:provider/provider.dart';
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
 import 'package:red_vital/screens/maps/blocs/application_bloc.dart';
 
 class Hospitals extends StatefulWidget {
@@ -14,6 +20,7 @@ class Hospitals extends StatefulWidget {
 }
 
 class _HospitalsState extends State<Hospitals> {
+<<<<<<< HEAD
   Completer<GoogleMapController> _mapController = Completer();
 
   late StreamSubscription locationSubscription;
@@ -53,10 +60,19 @@ class _HospitalsState extends State<Hospitals> {
 
   @override
   Widget build(BuildContext context) {
+=======
+  @override
+  Widget build(BuildContext context) {
+
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
     final applicationBloc = Provider.of<ApplicationBloc>(context);
+<<<<<<< HEAD
+=======
+    // print(applicationBloc.searchResults![0].description);
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
 
     return Scaffold(
         body: (applicationBloc.currentLocation == null)
@@ -78,6 +94,7 @@ class _HospitalsState extends State<Hospitals> {
               Stack(
                 children: [
                   Container(
+<<<<<<< HEAD
                     // width: screenWidth,
                     // width: double.infinity,
                     height: screenHeight*0.67,
@@ -86,10 +103,17 @@ class _HospitalsState extends State<Hospitals> {
                       compassEnabled: false,
                       tiltGesturesEnabled: false,
                       markers: Set<Marker>.of(applicationBloc.markers),
+=======
+                    width: screenWidth,
+                    height: screenHeight*0.5,
+                    child: GoogleMap(
+                      mapType: MapType.normal,
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
                       myLocationEnabled: true,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(applicationBloc.currentLocation!.latitude,
                             applicationBloc.currentLocation!.longitude),
+<<<<<<< HEAD
                         zoom: 14),
                       onMapCreated: (GoogleMapController controller){
                         _mapController.complete(controller);
@@ -99,6 +123,14 @@ class _HospitalsState extends State<Hospitals> {
 
                   if (applicationBloc.searchResults != null &&
                       applicationBloc.searchResults?.length !=0)
+=======
+                        zoom: 14
+                    ),
+                    ),
+                  ),
+
+                  if (applicationBloc.searchResults != null && applicationBloc.searchResults?.length !=0)
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
                     Container(
                     height: 300,
                     width: double.infinity,
@@ -108,8 +140,12 @@ class _HospitalsState extends State<Hospitals> {
                     ),
                   ),
 
+<<<<<<< HEAD
                   if (applicationBloc.searchResults != null &&
                   applicationBloc.searchResults?.length !=0)
+=======
+                  if (applicationBloc.searchResults != null && applicationBloc.searchResults?.length !=0)
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
                   Container(
                     height: 300,
                     child: ListView.builder(
@@ -121,16 +157,20 @@ class _HospitalsState extends State<Hospitals> {
                             style: TextStyle(
                               color: Colors.white
                           ),),
+<<<<<<< HEAD
                           onTap: (){
                             applicationBloc.setSelectedLocation(
                               applicationBloc.searchResults![index].placeId
                             );
                           },
+=======
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
                         );
                       }
                     ),
                   )
                 ],
+<<<<<<< HEAD
               ),
 
               SizedBox(
@@ -163,11 +203,14 @@ class _HospitalsState extends State<Hospitals> {
                         selectedColor: Colors.red),
                   ],
                 ),
+=======
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
               )
             ],
           )
     );
   }
+<<<<<<< HEAD
 
   Future<void> _goToPlace(Place place) async {
     final GoogleMapController controller = await _mapController.future;
@@ -181,4 +224,6 @@ class _HospitalsState extends State<Hospitals> {
     );
   }
 
+=======
+>>>>>>> afee6102c027c4a1061bc69655f22356ea949463
 }

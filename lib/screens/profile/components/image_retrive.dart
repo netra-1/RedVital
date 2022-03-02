@@ -9,10 +9,7 @@ class ImageRetrive extends StatefulWidget {
   State<ImageRetrive> createState() => _ImageRetriveState();
 }
 
-<<<<<<< HEAD
-=======
 // Image retrieve class
->>>>>>> afee6102c027c4a1061bc69655f22356ea949463
 class _ImageRetriveState extends State<ImageRetrive> {
 
   @override

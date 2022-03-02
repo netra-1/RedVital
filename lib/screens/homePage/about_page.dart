@@ -47,7 +47,7 @@ class _AboutPageState extends State<AboutPage> {
                 SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text("",
+                  child: Text("           Welcome to RedVital. \nA blood donation app developed by team 'Scavangers' This is all About us As we are still Students. ",
                     style: TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 19,
